@@ -3,9 +3,11 @@ import { useDispatch } from "react-redux";
 import authService from "./Appwrite/auth";
 import { login, logout, Loader, Footer, Header } from "./index";
 function App() {
+  console.log("I'm reaching till here");
   let [isLoading, setIsLoading] = useState(true);
   let dispatch = useDispatch();
   useEffect(() => {
+    setIsLoading(true);
     authService
       .getCurrentUser()
       .then((userData) => {
