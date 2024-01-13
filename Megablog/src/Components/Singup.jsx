@@ -25,75 +25,74 @@ function Singup() {
     }
   };
   return (
-    <div className="flex items-center justify-center">
-      <div
-        className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}>
-        <div className="mb-2 flex justify-center">
-          <span className="inline-block w-full max-w-[100px]">
-            <Logo width="100%" />
-          </span>
+    <div className="flex items-center justify-center flex-col">
+      <div className="bg-gray-100  p-8 rounded-lg">
+        <div
+          className={`mx-auto w-full max-w-lg rounded-xl p-10 border border-black/10`}>
+          <div className="mb-2 flex justify-center">
+            <span className="inline-block w-full max-w-[100px]">
+              <Logo width="100%" />
+            </span>
+          </div>
+          <h2 className="text-center text-2xl font-bold leading-tight">
+            Sign up to create account
+          </h2>
+          <p className="mt-2 text-center text-base text-black/60">
+            Already have an account?&nbsp;
+            <Link
+              to="/login"
+              className="font-medium text-primary transition-all duration-200 hover:underline">
+              Sign In
+            </Link>
+          </p>
+          {error && <p className="text-red-600 mt-8 text-center">{error} </p>}
         </div>
-        <h2 className="text-center text-2xl font-bold leading-tight">
-          Sign up to create account
-        </h2>
-        <p className="mt-2 text-center text-base text-black/60">
-          Already have an account?&nbsp;
-          <Link
-            to="/login"
-            className="font-medium text-primary transition-all duration-200 hover:underline">
-            Sign In
-          </Link>
-        </p>
-        {error && <p className="text-red-600 mt-8 text-center">{error} </p>}
-      </div>
-      <form onSubmit={handleSubmit(singup)}>
-        <div className="space-y-5">
-          <Input
-            label="Name: "
-            type="text"
-            placeholder="Please Enter your name"
-            {...register("name", {
-              required: true,
-              maxLength: 80,
-            })}
-          />
-          <Input
-            label="Email: "
-            type="email"
-            placeholder="Enter your Email here"
-            {...register("email", {
-              required: true,
-              validate: {
+        <form onSubmit={handleSubmit(singup)}>
+          <div className="space-y-5">
+            <Input
+              label="Name: "
+              type="text"
+              placeholder="Please Enter your name"
+              {...register("name", {
+                required: true,
+                maxLength: 80,
+              })}
+            />
+            <Input
+              label="Email: "
+              type="email"
+              placeholder="Enter your Email here"
+              {...register("email", {
+                required: true,
                 validate: {
                   matchPatern: (value) =>
                     /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
                     "Email address must be a valid address",
                 },
-              },
-            })}
-          />
-          <Input
-            label="Password: "
-            type="passsword"
-            placeholder="Please enter your password"
-            {...register("password", {
-              required: true,
-              validate: {
-                matchPatern: (value) => {
-                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/.test(
-                    value
-                  ) || "Enter the correct password";
+              })}
+            />
+            <Input
+              label="Password: "
+              type="password" // Corrected typo here
+              placeholder="Please enter your password"
+              {...register("password", {
+                required: true,
+                validate: {
+                  pattern: (value) => {
+                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/.test(
+                      value
+                    ) || "Enter the correct password";
+                  },
                 },
-              },
-            })}
-          />
-          <Button type="submit" className="w-full">
-            Create Account
-          </Button>
-        </div>
-      </form>
+              })}
+            />
+            <Button type="submit" className="w-full">
+              Create Account
+            </Button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
-
 export default Singup;

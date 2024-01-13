@@ -1,14 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  // Fix the spelling here
   status: false,
   userData: null,
 };
 
 const authSlice = createSlice({
   name: "auth",
-  initialState, // Fix the spelling here
+  initialState,
   reducers: {
     login: (state, action) => {
       state.status = true;

@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import authService from "./Appwrite/auth";
+import { Outlet } from "react-router-dom";
 import { login, logout, Loader, Footer, Header } from "./index";
 function App() {
-  console.log("I'm reaching till here");
-  let [isLoading, setIsLoading] = useState(true);
+  // console.log("I'm reaching till here");
+  let [isLoading, setIsLoading] = useState(false);
   let dispatch = useDispatch();
   useEffect(() => {
-    setIsLoading(true);
     authService
       .getCurrentUser()
       .then((userData) => {
@@ -17,16 +17,15 @@ function App() {
           dispatch(logout());
         }
       })
-      .catch((err) => {
-        console.log("error in app");
-      })
-      .finally(setIsLoading(false));
+      .finally(() => setIsLoading(false));
   }, []);
   return !isLoading ? (
-    <div className="min-h-screen flex flex-wrap content-between bg-gray-400">
+    <div className="min-h-screen flex flex-wrap content-between bg-gray-400 font-mono">
       <div className="w-full block ">
         <Header />
-        <main>{/* <Outlet/> */}</main>
+        <main>
+          <Outlet />
+        </main>
         <Footer />
       </div>
     </div>

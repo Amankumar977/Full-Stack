@@ -87,7 +87,7 @@ export class Service {
       await this.bucket.createFile(config.appwriteBucketId, ID.unique(), file);
       return true;
     } catch (error) {
-      console.log(error);
+      console.log(error, "is  here");
       return false;
     }
   }

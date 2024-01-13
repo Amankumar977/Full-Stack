@@ -1,6 +1,7 @@
-import React, { useId } from "react";
+import React, { useId, forwardRef } from "react";
 
-let Input = React.forwardRef(function Input(
+// Hint 1: Rename the HTML input element to avoid naming conflict
+let CustomInput = forwardRef(function Input(
   { label, type = "text", className = "", ...props },
   ref
 ) {
@@ -12,7 +13,8 @@ let Input = React.forwardRef(function Input(
           {label}
         </label>
       )}
-      <Input
+      {/* Hint 2: Use the ref in the correct place */}
+      <input
         type={type}
         id={id}
         className={` px-3 py-2 rounded-lg bg-white text-black outline-none focus:bg-gray-200 w-full ${className}`}
@@ -23,4 +25,4 @@ let Input = React.forwardRef(function Input(
   );
 });
 
-export default Input;
+export default CustomInput;

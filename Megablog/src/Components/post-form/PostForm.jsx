@@ -4,19 +4,27 @@ import { Button, Input, Select, RTE } from "../../index";
 import service from "../../Appwrite/appConfig";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+
 function PostForm({ post }) {
   const { register, handleSubmit, watch, setValue, control, getValues } =
     useForm({
       defaultValues: {
         title: post?.title || "",
-        slug: post?.slug || "",
+        slug: post?.$id || "",
         content: post?.content || "",
         status: post?.status || "active",
       },
     });
   const navigate = useNavigate();
-  const userData = useSelector((state) => state.user.userData);
+  const userData = useSelector((state) => {
+    return state.auth.userData;
+  });
   const submit = async (data) => {
+    if (!userData) {
+      console.error("User data is undefined. Unable to submit the form.");
+      return;
+    }
+
     if (post) {
       const file = data.image[0]
         ? await service.uploadFile(data.image[0])
@@ -26,7 +34,7 @@ function PostForm({ post }) {
         service.deleteFile(post.featuredImage);
       }
 
-      const dbPost = await service.updatePost(post.$id, {
+      const dbPost = await service.updatePost(post?.$id, {
         ...data,
         featuredImage: file ? file.$id : undefined,
       });
@@ -40,17 +48,18 @@ function PostForm({ post }) {
       if (file) {
         const fileId = file.$id;
         data.featuredImage = fileId;
+        console.log(typeof userData.$id);
         const dbPost = await service.createPost({
           ...data,
-          userId: userData.$id,
+          userid: userData.$id,
         });
-
         if (dbPost) {
           navigate(`/post/${dbPost.$id}`);
         }
       }
     }
   };
+
   const slugTransform = useCallback((value) => {
     if (value && typeof value === "string")
       return value
@@ -71,6 +80,7 @@ function PostForm({ post }) {
 
     return () => subscription.unsubscribe();
   }, [watch, slugTransform, setValue]);
+
   return (
     <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
       <div className="w-2/3 px-2">
@@ -109,7 +119,7 @@ function PostForm({ post }) {
         {post && (
           <div className="w-full mb-4">
             <img
-              src={service.getFilePreview(post.featuredImage)}
+              src={service.previewFile(post.featuredImage)}
               alt={post.title}
               className="rounded-lg"
             />

@@ -61,8 +61,8 @@ function Login() {
               })}
             />
             <Input
-              label="passsword"
-              type="passsword"
+              label="password"
+              type="password"
               placeholder="Enter your password"
               {...register("password", {
                 required: true,
