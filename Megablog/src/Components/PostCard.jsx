@@ -5,7 +5,7 @@ function PostCard({ $id, title, featuredImage }) {
   return (
     <div>
       <Link to={`/post/${$id}`}>
-        <div className="w-full bg-gray-100 rounded-full p-4">
+        <div className=" w-full bg-gray-100 rounded-full p-4 m-3">
           <div className="w-full justify-center mb-4">
             <img
               src={service.previewFile(featuredImage)}
