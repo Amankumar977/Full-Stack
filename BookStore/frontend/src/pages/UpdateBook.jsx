@@ -40,7 +40,7 @@ function CreateBook() {
       publishYear,
     };
     axios
-      .put(`${import.meta.env.VITE_BASE_URL}/${id}`, data)
+      .put(`${import.meta.env.VITE_BASE_URL}/books/${id}`, data)
       .then(() => {
         setIsLoading(false);
         enqueueSnackbar("Book updated succesfully", { variant: "success" });
