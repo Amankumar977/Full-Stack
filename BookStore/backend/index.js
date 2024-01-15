@@ -10,7 +10,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://book-management-front.vercel.app/",
+    origin: "https://book-management-front.vercel.app",
   })
 );
 
