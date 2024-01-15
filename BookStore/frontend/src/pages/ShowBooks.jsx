@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { BackButton } from "../Components/index";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import Spinner from "../components/Spinner";
+import { Spinner } from "../Components/index";
 function ShowBooks() {
   let { id } = useParams();
   let [book, setBook] = useState([]);
