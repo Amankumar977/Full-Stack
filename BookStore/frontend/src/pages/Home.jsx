@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Spinner from "../components/Spinner";
+import Spinner from "../Components/Spinner";
 import { Link } from "react-router-dom";
-import { MdOutlineAddBox, MdDeleteOutline } from "react-icons/md";
-import { IoInformationCircleOutline } from "react-icons/io5";
-import { LuPencilLine } from "react-icons/lu";
+import { MdOutlineAddBox } from "react-icons/md";
 import { BookCard, BookTable } from "../Components/index";
 function Home() {
   const [isLoading, setIsLoading] = useState(false);
