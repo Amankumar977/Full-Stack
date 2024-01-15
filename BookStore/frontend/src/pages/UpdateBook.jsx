@@ -17,7 +17,7 @@ function CreateBook() {
   useEffect(() => {
     setIsLoading(true);
     axios
-      .put(`${import.meta.env.VITE_BASE_URL}/books/${id}`)
+      .get(`${import.meta.env.VITE_BASE_URL}/books/${id}`)
       .then((res) => {
         setTitle(res.data.data.title);
         setAuthor(res.data.data.author);
@@ -40,7 +40,7 @@ function CreateBook() {
       publishYear,
     };
     axios
-      .put(`http://localhost:5000/books/${id}`, data)
+      .put(`${import.meta.env.VITE_BASE_URL}/${id}`, data)
       .then(() => {
         setIsLoading(false);
         enqueueSnackbar("Book updated succesfully", { variant: "success" });
