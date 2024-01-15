@@ -8,7 +8,11 @@ const PORT = appConfig.PORT;
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5173/",
+  })
+);
 app.get("/", (req, res) => {
   res.status(201).send("<h1> Hello </h1>");
 });
