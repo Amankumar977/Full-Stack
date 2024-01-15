@@ -10,7 +10,7 @@ function ShowBooks() {
   useEffect(() => {
     setIsLoading(true);
     axios
-      .get(`http://localhost:5000/books/${id}`)
+      .get(`${import.meta.env.VITE_BASE_URL}/books/${id}`)
       .then((res) => {
         setIsLoading(false);
         setBook(res.data.data);

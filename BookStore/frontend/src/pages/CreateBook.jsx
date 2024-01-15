@@ -20,7 +20,7 @@ function CreateBook() {
       publishYear,
     };
     axios
-      .post("http://localhost:5000/books", data)
+      .post(`${import.meta.env.VITE_BASE_URL}/books`, data)
       .then(() => {
         setIsLoading(false);
         enqueueSnackbar("Book Created Sucessfully", { variant: "success" });

@@ -17,7 +17,7 @@ function CreateBook() {
   useEffect(() => {
     setIsLoading(true);
     axios
-      .get(`http://localhost:5000/books/${id}`)
+      .get(`${import.meta.env.VITE_BASE_URL}/books/${id}`)
       .then((res) => {
         setTitle(res.data.data.title);
         setAuthor(res.data.data.author);
